@@ -1,0 +1,63 @@
+MPLINK 5.08, LINKER
+Linker Map File - Created Sat Feb 23 18:48:58 2019
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                   .org_0       code   0x000000    program   0x0000f4
+                   .cinit    romdata   0x0000f4    program   0x000002
+.config_300001_BUILD/DEFAULT/PRODUCTION/ELEVADO    romdata   0x300001    program   0x000001
+.config_300003_BUILD/DEFAULT/PRODUCTION/ELEVADO    romdata   0x300003    program   0x000001
+.config_300005_BUILD/DEFAULT/PRODUCTION/ELEVADO    romdata   0x300005    program   0x000001
+.config_300006_BUILD/DEFAULT/PRODUCTION/ELEVADO    romdata   0x300006    program   0x000001
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x0000f5      
+                            0x300001    0x300001      
+                            0x300003    0x300003      
+                            0x300005    0x300006      
+            250 out of 33048 program addresses used, program memory utilization is 0%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+     BAJAR_SEGUNDO_PRIMER   0x0000c2    program     static C:\Users\aguil\Desktop\Elevador\Elevador.X\elevador.asm
+      BAJAR_TERCER_PRIMER   0x0000aa    program     static C:\Users\aguil\Desktop\Elevador\Elevador.X\elevador.asm
+     BAJAR_TERCER_SEGUNDO   0x000092    program     static C:\Users\aguil\Desktop\Elevador\Elevador.X\elevador.asm
+                      DOS   0x0000de    program     static C:\Users\aguil\Desktop\Elevador\Elevador.X\elevador.asm
+                 Mainloop   0x000018    program     static C:\Users\aguil\Desktop\Elevador\Elevador.X\elevador.asm
+                  RETARDO   0x0000da    program     static C:\Users\aguil\Desktop\Elevador\Elevador.X\elevador.asm
+                     STOP   0x000042    program     static C:\Users\aguil\Desktop\Elevador\Elevador.X\elevador.asm
+     SUBIR_PRIMER_SEGUNDO   0x00004a    program     static C:\Users\aguil\Desktop\Elevador\Elevador.X\elevador.asm
+     SUBIR_PRIMER_TERCERO   0x000062    program     static C:\Users\aguil\Desktop\Elevador\Elevador.X\elevador.asm
+     SUBIR_SEGUNDO_TERCER   0x00007a    program     static C:\Users\aguil\Desktop\Elevador\Elevador.X\elevador.asm
+                    Start   0x000000    program     static C:\Users\aguil\Desktop\Elevador\Elevador.X\elevador.asm
+                     TRES   0x0000da    program     static C:\Users\aguil\Desktop\Elevador\Elevador.X\elevador.asm
+                      UNO   0x0000e2    program     static C:\Users\aguil\Desktop\Elevador\Elevador.X\elevador.asm
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                    Start   0x000000    program     static C:\Users\aguil\Desktop\Elevador\Elevador.X\elevador.asm
+                 Mainloop   0x000018    program     static C:\Users\aguil\Desktop\Elevador\Elevador.X\elevador.asm
+                     STOP   0x000042    program     static C:\Users\aguil\Desktop\Elevador\Elevador.X\elevador.asm
+     SUBIR_PRIMER_SEGUNDO   0x00004a    program     static C:\Users\aguil\Desktop\Elevador\Elevador.X\elevador.asm
+     SUBIR_PRIMER_TERCERO   0x000062    program     static C:\Users\aguil\Desktop\Elevador\Elevador.X\elevador.asm
+     SUBIR_SEGUNDO_TERCER   0x00007a    program     static C:\Users\aguil\Desktop\Elevador\Elevador.X\elevador.asm
+     BAJAR_TERCER_SEGUNDO   0x000092    program     static C:\Users\aguil\Desktop\Elevador\Elevador.X\elevador.asm
+      BAJAR_TERCER_PRIMER   0x0000aa    program     static C:\Users\aguil\Desktop\Elevador\Elevador.X\elevador.asm
+     BAJAR_SEGUNDO_PRIMER   0x0000c2    program     static C:\Users\aguil\Desktop\Elevador\Elevador.X\elevador.asm
+                  RETARDO   0x0000da    program     static C:\Users\aguil\Desktop\Elevador\Elevador.X\elevador.asm
+                     TRES   0x0000da    program     static C:\Users\aguil\Desktop\Elevador\Elevador.X\elevador.asm
+                      DOS   0x0000de    program     static C:\Users\aguil\Desktop\Elevador\Elevador.X\elevador.asm
+                      UNO   0x0000e2    program     static C:\Users\aguil\Desktop\Elevador\Elevador.X\elevador.asm
+
+
