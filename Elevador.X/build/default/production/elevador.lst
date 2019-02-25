@@ -1,4 +1,4 @@
-MPASM 5.77                      ELEVADOR.ASM   2-23-2019  18:48:57         PAGE  1
+MPASM 5.77                      ELEVADOR.ASM   2-25-2019  15:00:01         PAGE  1
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -30,168 +30,317 @@ Warning[207]: Found label after column 1. (Aux2)
   00000001            00011     Aux2 EQU 0x01
 Warning[207]: Found label after column 1. (Aux3)
   00000002            00012     Aux3 EQU 0x02
-                      00013   
+Warning[207]: Found label after column 1. (Aux4)
+  00000003            00013     Aux4 EQU 0x03
+Warning[207]: Found label after column 1. (Aux5)
+  00000004            00014     Aux5 EQU 0x04
 Warning[207]: Found label after column 1. (Start)
-000000                00014  Start:
-000000 010F           00015     MOVLB 0x0F
-000002 6A00           00016     CLRF Aux1
-000004 6A01           00017     Clrf Aux2
-000006 6A02           00018     Clrf Aux3
-                      00019     
-000008 6B5B           00020     CLRF ANSELA 
-00000A 6B5E           00021     CLRF ANSELD
-00000C 6B5D           00022     CLRF ANSELC
-00000E 6A95           00023     CLRF TRISD
-000010 6A92           00024     CLRF TRISA
-000012 6A94           00025     CLRF TRISC
+000000                00015  Start:
+000000 010F           00016     MOVLB 0x0F
+000002 6A00           00017     CLRF Aux1
+000004 6A01           00018     Clrf Aux2
+000006 6A02           00019     Clrf Aux3
+000008 6A03           00020     CLRF Aux4
+00000A 6A04           00021     CLRF Aux5
+                      00022     
+00000C 6B5B           00023     CLRF ANSELA 
+00000E 6B5E           00024     CLRF ANSELD
+000010 6B5C           00025     CLRF ANSELB
                       00026     
-000014 0E53           00027     MOVLW b'01010011'           ;Configura Registro OSCCON
-000016 6ED3           00028     MOVWF OSCCON
-                      00029     
+000012 6A95           00027     CLRF TRISD
+000014 6A92           00028     CLRF TRISA
+000016 6A93           00029     CLRF TRISB
+                      00030     
+000018 0E53           00031     MOVLW b'01010011'           ;Configura Registro OSCCON
+00001A 6ED3           00032     MOVWF OSCCON
+                      00033     
 Warning[207]: Found label after column 1. (Mainloop)
-000018                00030     Mainloop:
-                      00031 
-000018 B080           00032     BTFSC PORTA,0
-00001A EF?? F???      00033     GOTO  STOP
-00001E B280           00034     BTFSC PORTA,1
-000020 EF?? F???      00035     GOTO SUBIR_PRIMER_SEGUNDO
-000024 B480           00036     BTFSC PORTA,2
-000026 EF?? F???      00037     GOTO SUBIR_SEGUNDO_TERCER
-MPASM 5.77                      ELEVADOR.ASM   2-23-2019  18:48:57         PAGE  2
+00001C                00034     Mainloop:
+                      00035 
+MPASM 5.77                      ELEVADOR.ASM   2-25-2019  15:00:01         PAGE  2
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-00002A B680           00038     BTFSC PORTA,3
-00002C EF?? F???      00039     GOTO BAJAR_TERCER_SEGUNDO
-000030 B880           00040     BTFSC PORTA,4
-000032 EF?? F???      00041     GOTO BAJAR_TERCER_PRIMER
-000036 BA80           00042     BTFSC PORTA,5
-000038 EF?? F???      00043     GOTO BAJAR_SEGUNDO_PRIMER
-00003C BC80           00044     BTFSC PORTA,6
-00003E EF?? F???      00045     GOTO SUBIR_PRIMER_TERCERO
-                      00046     
+00001C B080           00036     BTFSC PORTA,0
+00001E EF?? F???      00037     GOTO  STOP
+000022 B280           00038     BTFSC PORTA,1
+000024 EF?? F???      00039     GOTO SUBIR_PRIMER_SEGUNDO
+000028 B480           00040     BTFSC PORTA,2
+00002A EF?? F???      00041     GOTO SUBIR_SEGUNDO_TERCER
+00002E B680           00042     BTFSC PORTA,3
+000030 EF?? F???      00043     GOTO BAJAR_TERCER_SEGUNDO
+000034 B880           00044     BTFSC PORTA,4
+000036 EF?? F???      00045     GOTO BAJAR_TERCER_PRIMER
+00003A BA80           00046     BTFSC PORTA,5
+00003C EF?? F???      00047     GOTO BAJAR_SEGUNDO_PRIMER
+000040 BC80           00048     BTFSC PORTA,6
+000042 EF?? F???      00049     GOTO SUBIR_PRIMER_TERCERO
+                      00050     
 Warning[207]: Found label after column 1. (STOP)
-000042                00047     STOP:
-000042 0E00           00048     MOVLW 0x00
-000044 6E8C           00049     MOVWF LATD
-000046 EF?? F???      00050     GOTO Mainloop
-                      00051     
-00004A                00052 SUBIR_PRIMER_SEGUNDO:
-00004A 0E82           00053     MOVLW 0x82
-00004C 6E8C           00054     MOVWF LATD
-00004E EC?? F???      00055     CALL RETARDO
-000052 0E08           00056     MOVLW 0x08
-000054 6E8C           00057     MOVWF LATD
-000056 EC?? F???      00058     CALL RETARDO
-00005A 0E00           00059     MOVLW 0x00
-00005C 6E8C           00060     MOVWF LATD
+000046                00051     STOP:
+000046 0E00           00052     MOVLW 0x00
+000048 6E8C           00053     MOVWF LATD
+00004A 0E00           00054     MOVLW 0x00
+00004C 6E8A           00055     MOVWF LATB
+00004E EF?? F???      00056     GOTO Mainloop
+                      00057     
+000052                00058 SUBIR_PRIMER_SEGUNDO:
+                      00059     
+                      00060    
                       00061     
-                      00062     
-00005E EF?? F???      00063     GOTO Mainloop
-                      00064     
-000062                00065 SUBIR_PRIMER_TERCERO:
-000062 0E82           00066     MOVLW 0x82
-000064 6E8C           00067     MOVWF LATD
-000066 EC?? F???      00068     CALL RETARDO
-00006A 0E20           00069     MOVLW 0x20
-00006C 6E8C           00070     MOVWF LATD
-00006E EC?? F???      00071     CALL RETARDO
-000072 0E00           00072     MOVLW 0x00
-000074 6E8C           00073     MOVWF LATD
-                      00074     
-                      00075     
-000076 EF?? F???      00076     GOTO Mainloop    
-                      00077     
-Warning[207]: Found label after column 1. (SUBIR_SEGUNDO_TERCER)
-00007A                00078   SUBIR_SEGUNDO_TERCER:
-00007A 0E88           00079     MOVLW 0x88
-00007C 6E8C           00080     MOVWF LATD
-00007E EC?? F???      00081     CALL RETARDO
-000082 0E20           00082     MOVLW 0x20
-000084 6E8C           00083     MOVWF LATD
-000086 EC?? F???      00084     CALL RETARDO
-00008A 0E00           00085     MOVLW 0x00
-00008C 6E8C           00086     MOVWF LATD
-00008E EF?? F???      00087     GOTO Mainloop 
-                      00088     
-MPASM 5.77                      ELEVADOR.ASM   2-23-2019  18:48:57         PAGE  3
+000052 0E82           00062     MOVLW 0x82
+000054 6E8C           00063     MOVWF LATD
+000056 EC?? F???      00064     CALL RETARDO
+                      00065     
+00005A 0E01           00066     MOVLW 0x01
+00005C 6E8A           00067     MOVWF LATB
+00005E EC?? F???      00068     CALL Retardo_1
+000062 0E00           00069     MOVLW 0x00
+000064 6E8A           00070     MOVWF LATB
+000066 EC?? F???      00071     CALL Retardo_1
+                      00072    
+00006A 0E08           00073     MOVLW 0x08
+00006C 6E8C           00074     MOVWF LATD
+00006E EC?? F???      00075     CALL RETARDO
+                      00076     
+000072 0E01           00077     MOVLW 0x01
+000074 6E8A           00078     MOVWF LATB
+000076 EC?? F???      00079     CALL Retardo_1
+00007A 0E00           00080     MOVLW 0x00
+00007C 6E8A           00081     MOVWF LATB
+00007E EC?? F???      00082     CALL Retardo_1
+                      00083     
+000082 0E00           00084     MOVLW 0x00
+000084 6E8C           00085     MOVWF LATD
+000086 EC?? F???      00086     CALL RETARDO
+                      00087     
+MPASM 5.77                      ELEVADOR.ASM   2-25-2019  15:00:01         PAGE  3
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-Warning[207]: Found label after column 1. (BAJAR_TERCER_SEGUNDO)
-000092                00089     BAJAR_TERCER_SEGUNDO:
-000092 0E60           00090     MOVLW 0x60
-000094 6E8C           00091     MOVWF LATD
-000096 EC?? F???      00092     CALL RETARDO
-00009A 0E08           00093     MOVLW 0x08
-00009C 6E8C           00094     MOVWF LATD
-00009E EC?? F???      00095     CALL RETARDO
-0000A2 0E00           00096     MOVLW 0x00
-0000A4 6E8C           00097     MOVWF LATD
-0000A6 EF?? F???      00098     GOTO Mainloop
-                      00099     
-Warning[207]: Found label after column 1. (BAJAR_TERCER_PRIMER)
-0000AA                00100     BAJAR_TERCER_PRIMER:
-0000AA 0E60           00101     MOVLW 0x60
-0000AC 6E8C           00102     MOVWF LATD
-0000AE EC?? F???      00103     CALL RETARDO
-0000B2 0E02           00104     MOVLW 0x02
-0000B4 6E8C           00105     MOVWF LATD
-0000B6 EC?? F???      00106     CALL RETARDO
-0000BA 0E00           00107     MOVLW 0x00
-0000BC 6E8C           00108     MOVWF LATD
-0000BE EF?? F???      00109     GOTO Mainloop
+00008A 0E01           00088     MOVLW 0x01
+00008C 6E8A           00089     MOVWF LATB
+00008E EC?? F???      00090     CALL Retardo_1
+                      00091     
+000092 EF?? F???      00092     GOTO Mainloop
+                      00093     
+000096                00094 SUBIR_PRIMER_TERCERO:
+000096 0E82           00095     MOVLW 0x82
+000098 6E8C           00096     MOVWF LATD
+00009A EC?? F???      00097     CALL RETARDO
+                      00098     
+00009E 0E01           00099     MOVLW 0x01
+0000A0 6E8A           00100     MOVWF LATB
+0000A2 EC?? F???      00101     CALL Retardo_1
+0000A6 0E00           00102     MOVLW 0x00
+0000A8 6E8A           00103     MOVWF LATB
+0000AA EC?? F???      00104     CALL Retardo_1
+                      00105     
+                      00106     
+0000AE 0E20           00107     MOVLW 0x20
+0000B0 6E8C           00108     MOVWF LATD
+0000B2 EC?? F???      00109     CALL RETARDO
                       00110     
-Warning[207]: Found label after column 1. (BAJAR_SEGUNDO_PRIMER)
-0000C2                00111     BAJAR_SEGUNDO_PRIMER:
-0000C2 0E48           00112     MOVLW 0x48
-0000C4 6E8C           00113     MOVWF LATD
-0000C6 EC?? F???      00114     CALL RETARDO
-0000CA 0E02           00115     MOVLW 0x02
-0000CC 6E8C           00116     MOVWF LATD
-0000CE EC?? F???      00117     CALL RETARDO
-0000D2 0E00           00118     MOVLW 0x00
-0000D4 6E8C           00119     MOVWF LATD
-0000D6 EF?? F???      00120     GOTO Mainloop
-                      00121     
-                      00122     
-                      00123 
+0000B6 0E01           00111     MOVLW 0x01
+0000B8 6E8A           00112     MOVWF LATB
+0000BA EC?? F???      00113     CALL Retardo_1
+0000BE 0E00           00114     MOVLW 0x00
+0000C0 6E8A           00115     MOVWF LATB
+0000C2 EC?? F???      00116     CALL Retardo_1
+                      00117     
+0000C6 0E00           00118     MOVLW 0x00
+0000C8 6E8C           00119     MOVWF LATD
+                      00120     
+0000CA 0E01           00121     MOVLW 0x01
+0000CC 6E8A           00122     MOVWF LATB
+0000CE EC?? F???      00123     CALL Retardo_1
                       00124     
-Warning[207]: Found label after column 1. (RETARDO)
-0000DA                00125     RETARDO:
-Warning[207]: Found label after column 1. (TRES)
-0000DA                00126     TRES:
-0000DA 0EFA           00127     MOVLW 0XFA
-0000DC 6E01           00128     MOVWF Aux2
-Warning[207]: Found label after column 1. (DOS)
-0000DE                00129     DOS:
-0000DE 0EFA           00130     MOVLW 0XFA
-0000E0 6E02           00131     MOVWF Aux3 
-Warning[207]: Found label after column 1. (UNO)
-0000E2                00132     UNO:
-0000E2 0000           00133     NOP
-0000E4 0000           00134     NOP
-MPASM 5.77                      ELEVADOR.ASM   2-23-2019  18:48:57         PAGE  4
+0000D2 EF?? F???      00125     GOTO Mainloop    
+                      00126     
+Warning[207]: Found label after column 1. (SUBIR_SEGUNDO_TERCER)
+0000D6                00127   SUBIR_SEGUNDO_TERCER:
+0000D6 0E88           00128     MOVLW 0x88
+0000D8 6E8C           00129     MOVWF LATD
+0000DA EC?? F???      00130     CALL RETARDO
+                      00131     
+0000DE 0E01           00132     MOVLW 0x01
+0000E0 6E8A           00133     MOVWF LATB
+0000E2 EC?? F???      00134     CALL Retardo_1
+0000E6 0E00           00135     MOVLW 0x00
+0000E8 6E8A           00136     MOVWF LATB
+0000EA EC?? F???      00137     CALL Retardo_1
+                      00138     
+0000EE 0E20           00139     MOVLW 0x20
+MPASM 5.77                      ELEVADOR.ASM   2-25-2019  15:00:01         PAGE  4
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-0000E6 2E00           00135     DECFSZ Aux1 ,1
-0000E8 EF?? F???      00136     GOTO UNO
-0000EC 2E01           00137     DECFSZ Aux2, 1
-0000EE EF?? F???      00138     GOTO DOS
-                      00139  
-0000F2 0012           00140     RETURN 
-                      00141    
+0000F0 6E8C           00140     MOVWF LATD
+0000F2 EC?? F???      00141     CALL RETARDO
                       00142     
-                      00143     
-                      00144     END
-MPASM 5.77                      ELEVADOR.ASM   2-23-2019  18:48:57         PAGE  5
+0000F6 0E01           00143     MOVLW 0x01
+0000F8 6E8A           00144     MOVWF LATB
+0000FA EC?? F???      00145     CALL Retardo_1
+0000FE 0E00           00146     MOVLW 0x00
+000100 6E8A           00147     MOVWF LATB
+000102 EC?? F???      00148     CALL Retardo_1
+                      00149     
+000106 0E00           00150     MOVLW 0x00
+000108 6E8C           00151     MOVWF LATD
+                      00152   
+00010A 0E01           00153     MOVLW 0x01
+00010C 6E8A           00154     MOVWF LATB
+00010E EC?? F???      00155     CALL Retardo_1
+000112 EF?? F???      00156     GOTO Mainloop 
+                      00157     
+Warning[207]: Found label after column 1. (BAJAR_TERCER_SEGUNDO)
+000116                00158     BAJAR_TERCER_SEGUNDO:
+000116 0E60           00159     MOVLW 0x60
+000118 6E8C           00160     MOVWF LATD
+00011A EC?? F???      00161     CALL RETARDO
+                      00162     
+00011E 0E01           00163     MOVLW 0x01
+000120 6E8A           00164     MOVWF LATB
+000122 EC?? F???      00165     CALL Retardo_1
+000126 0E00           00166     MOVLW 0x00
+000128 6E8A           00167     MOVWF LATB
+00012A EC?? F???      00168     CALL Retardo_1
+                      00169     
+00012E 0E08           00170     MOVLW 0x08
+000130 6E8C           00171     MOVWF LATD
+000132 EC?? F???      00172     CALL RETARDO
+                      00173     
+000136 0E01           00174     MOVLW 0x01
+000138 6E8A           00175     MOVWF LATB
+00013A EC?? F???      00176     CALL Retardo_1
+00013E 0E00           00177     MOVLW 0x00
+000140 6E8A           00178     MOVWF LATB
+000142 EC?? F???      00179     CALL Retardo_1
+                      00180     
+000146 0E00           00181     MOVLW 0x00
+000148 6E8C           00182     MOVWF LATD
+                      00183     
+00014A 0E01           00184     MOVLW 0x01
+00014C 6E8A           00185     MOVWF LATB
+00014E EC?? F???      00186     CALL Retardo_1
+000152 EF?? F???      00187     GOTO Mainloop
+                      00188     
+Warning[207]: Found label after column 1. (BAJAR_TERCER_PRIMER)
+000156                00189     BAJAR_TERCER_PRIMER:
+000156 0E60           00190     MOVLW 0x60
+MPASM 5.77                      ELEVADOR.ASM   2-25-2019  15:00:01         PAGE  5
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+000158 6E8C           00191     MOVWF LATD
+00015A EC?? F???      00192     CALL RETARDO
+                      00193     
+00015E 0E01           00194     MOVLW 0x01
+000160 6E8A           00195     MOVWF LATB
+000162 EC?? F???      00196     CALL Retardo_1
+000166 0E00           00197     MOVLW 0x00
+000168 6E8A           00198     MOVWF LATB
+00016A EC?? F???      00199     CALL Retardo_1
+                      00200     
+00016E 0E02           00201     MOVLW 0x02
+000170 6E8C           00202     MOVWF LATD
+000172 EC?? F???      00203     CALL RETARDO
+                      00204     
+000176 0E01           00205     MOVLW 0x01
+000178 6E8A           00206     MOVWF LATB
+00017A EC?? F???      00207     CALL Retardo_1
+00017E 0E00           00208     MOVLW 0x00
+000180 6E8A           00209     MOVWF LATB
+000182 EC?? F???      00210     CALL Retardo_1
+                      00211     
+000186 0E00           00212     MOVLW 0x00
+000188 6E8C           00213     MOVWF LATD
+                      00214     
+00018A 0E01           00215     MOVLW 0x01
+00018C 6E8A           00216     MOVWF LATB
+00018E EC?? F???      00217     CALL Retardo_1
+000192 EF?? F???      00218     GOTO Mainloop
+                      00219     
+Warning[207]: Found label after column 1. (BAJAR_SEGUNDO_PRIMER)
+000196                00220     BAJAR_SEGUNDO_PRIMER:
+000196 0E48           00221     MOVLW 0x48
+000198 6E8C           00222     MOVWF LATD
+00019A EC?? F???      00223     CALL RETARDO
+                      00224     
+00019E 0E01           00225     MOVLW 0x01
+0001A0 6E8A           00226     MOVWF LATB
+0001A2 EC?? F???      00227     CALL Retardo_1
+0001A6 0E00           00228     MOVLW 0x00
+0001A8 6E8A           00229     MOVWF LATB
+0001AA EC?? F???      00230     CALL Retardo_1
+                      00231     
+0001AE 0E02           00232     MOVLW 0x02
+0001B0 6E8C           00233     MOVWF LATD
+0001B2 EC?? F???      00234     CALL RETARDO
+                      00235     
+0001B6 0E01           00236     MOVLW 0x01
+0001B8 6E8A           00237     MOVWF LATB
+0001BA EC?? F???      00238     CALL Retardo_1
+0001BE 0E00           00239     MOVLW 0x00
+0001C0 6E8A           00240     MOVWF LATB
+0001C2 EC?? F???      00241     CALL Retardo_1
+                      00242     
+MPASM 5.77                      ELEVADOR.ASM   2-25-2019  15:00:01         PAGE  6
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0001C6 0E00           00243     MOVLW 0x00
+0001C8 6E8C           00244     MOVWF LATD
+                      00245     
+0001CA 0E01           00246     MOVLW 0x01
+0001CC 6E8A           00247     MOVWF LATB
+0001CE EC?? F???      00248     CALL Retardo_1
+0001D2 EF?? F???      00249     GOTO Mainloop
+                      00250     
+                      00251    
+                      00252 
+                      00253     
+Warning[207]: Found label after column 1. (RETARDO)
+0001D6                00254     RETARDO:
+Warning[207]: Found label after column 1. (TRES)
+0001D6                00255     TRES:
+0001D6 0EFA           00256     MOVLW 0XFA
+0001D8 6E01           00257     MOVWF Aux2
+Warning[207]: Found label after column 1. (DOS)
+0001DA                00258     DOS:
+0001DA 0EFA           00259     MOVLW 0XFA
+0001DC 6E02           00260     MOVWF Aux3 
+Warning[207]: Found label after column 1. (UNO)
+0001DE                00261     UNO:
+0001DE 0000           00262     NOP
+0001E0 0000           00263     NOP
+0001E2 2E00           00264     DECFSZ Aux1 ,1
+0001E4 EF?? F???      00265     GOTO UNO
+0001E8 2E01           00266     DECFSZ Aux2, 1
+0001EA EF?? F???      00267     GOTO DOS
+                      00268  
+0001EE 0012           00269     RETURN 
+                      00270    
+Warning[207]: Found label after column 1. (Retardo_1)
+0001F0                00271    Retardo_1:
+0001F0 2E03           00272     DECFSZ Aux4, 1              
+0001F2 EF?? F???      00273     GOTO Retardo_1              
+0001F6 2E04           00274     DECFSZ Aux5, 1              
+0001F8 EF?? F???      00275     GOTO Retardo_1              
+0001FC 0012           00276     RETURN 
+                      00277     
+                      00278     END
+MPASM 5.77                      ELEVADOR.ASM   2-25-2019  15:00:01         PAGE  7
 
 
 SYMBOL TABLE
@@ -250,7 +399,7 @@ AHEN                              00000001
 AN0                               00000000
 AN1                               00000001
 AN2                               00000002
-MPASM 5.77                      ELEVADOR.ASM   2-23-2019  18:48:57         PAGE  6
+MPASM 5.77                      ELEVADOR.ASM   2-25-2019  15:00:01         PAGE  8
 
 
 SYMBOL TABLE
@@ -291,9 +440,11 @@ ANSELE                            00000F5F
 Aux1                              00000000
 Aux2                              00000001
 Aux3                              00000002
-BAJAR_SEGUNDO_PRIMER              000000C2
-BAJAR_TERCER_PRIMER               000000AA
-BAJAR_TERCER_SEGUNDO              00000092
+Aux4                              00000003
+Aux5                              00000004
+BAJAR_SEGUNDO_PRIMER              00000196
+BAJAR_TERCER_PRIMER               00000156
+BAJAR_TERCER_SEGUNDO              00000116
 BANKED                            00000001
 BAUDCON                           00000FB8
 BAUDCON1                          00000FB8
@@ -307,14 +458,14 @@ BF                                00000000
 BGVST                             00000006
 BOEN                              00000004
 BOR                               00000000
-BRG0                              00000000
-BRG1                              00000001
-MPASM 5.77                      ELEVADOR.ASM   2-23-2019  18:48:57         PAGE  7
+MPASM 5.77                      ELEVADOR.ASM   2-25-2019  15:00:01         PAGE  9
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+BRG0                              00000000
+BRG1                              00000001
 BRG10                             00000002
 BRG11                             00000003
 BRG12                             00000004
@@ -366,14 +517,14 @@ C2R                               00000002
 C2RSEL                            00000004
 C2SP                              00000003
 C2SYNC                            00000000
-C2TSEL                            00000003
-CCH0                              00000000
-MPASM 5.77                      ELEVADOR.ASM   2-23-2019  18:48:57         PAGE  8
+MPASM 5.77                      ELEVADOR.ASM   2-25-2019  15:00:01         PAGE 10
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+C2TSEL                            00000003
+CCH0                              00000000
 CCH1                              00000001
 CCP1                              00000002
 CCP1ASE                           00000007
@@ -425,14 +576,14 @@ CM2IP                             00000005
 CMP1MD                            00000003
 CMP2MD                            00000004
 COE                               00000005
-CON                               00000007
-COUT1                             00000006
-MPASM 5.77                      ELEVADOR.ASM   2-23-2019  18:48:57         PAGE  9
+MPASM 5.77                      ELEVADOR.ASM   2-25-2019  15:00:01         PAGE 11
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+CON                               00000007
+COUT1                             00000006
 COUT2                             00000006
 CPOL                              00000004
 CRC16EE                           00000002
@@ -480,18 +631,18 @@ DFN8EF                            00000003
 DHEN                              00000000
 DIR                               00000002
 DONE                              00000001
-DOS                               000000DE
+DOS                               000001DA
 DTRXP                             00000005
 D_NOT_A                           00000005
 ECCP1AS                           00000FB6
-ECCP1AS0                          00000004
-ECCP1AS1                          00000005
-MPASM 5.77                      ELEVADOR.ASM   2-23-2019  18:48:57         PAGE 10
+MPASM 5.77                      ELEVADOR.ASM   2-25-2019  15:00:01         PAGE 12
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+ECCP1AS0                          00000004
+ECCP1AS1                          00000005
 ECCP1AS2                          00000006
 ECCP1ASE                          00000007
 ECCP1CON                          00000FBD
@@ -543,14 +694,14 @@ FSEN                              00000002
 FSR0                              00000000
 FSR0H                             00000FEA
 FSR0L                             00000FE9
-FSR1                              00000001
-FSR1H                             00000FE2
-MPASM 5.77                      ELEVADOR.ASM   2-23-2019  18:48:57         PAGE 11
+MPASM 5.77                      ELEVADOR.ASM   2-25-2019  15:00:01         PAGE 13
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+FSR1                              00000001
+FSR1H                             00000FE2
 FSR1L                             00000FE1
 FSR2                              00000002
 FSR2H                             00000FDA
@@ -602,14 +753,14 @@ INT2E                             00000004
 INT2F                             00000001
 INT2IE                            00000004
 INT2IF                            00000001
-INT2IP                            00000007
-INT2P                             00000007
-MPASM 5.77                      ELEVADOR.ASM   2-23-2019  18:48:57         PAGE 12
+MPASM 5.77                      ELEVADOR.ASM   2-25-2019  15:00:01         PAGE 14
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+INT2IP                            00000007
+INT2P                             00000007
 INTCON                            00000FF2
 INTCON2                           00000FF1
 INTCON3                           00000FF0
@@ -661,14 +812,14 @@ LATA7                             00000007
 LATB                              00000F8A
 LATB0                             00000000
 LATB1                             00000001
-LATB2                             00000002
-LATB3                             00000003
-MPASM 5.77                      ELEVADOR.ASM   2-23-2019  18:48:57         PAGE 13
+MPASM 5.77                      ELEVADOR.ASM   2-25-2019  15:00:01         PAGE 15
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+LATB2                             00000002
+LATB3                             00000003
 LATB4                             00000004
 LATB5                             00000005
 LATB6                             00000006
@@ -703,7 +854,7 @@ MC1OUT                            00000007
 MC2OUT                            00000006
 MSSP1MD                           00000006
 MSSPMD                            00000006
-Mainloop                          00000018
+Mainloop                          0000001C
 N                                 00000004
 NOT_BOR                           00000000
 NOT_DONE                          00000001
@@ -720,14 +871,14 @@ NVCFG0                            00000000
 NVCFG1                            00000001
 OERR                              00000001
 OESPP                             00000002
-ON                                00000007
-OSC2                              00000006
-MPASM 5.77                      ELEVADOR.ASM   2-23-2019  18:48:57         PAGE 14
+MPASM 5.77                      ELEVADOR.ASM   2-25-2019  15:00:01         PAGE 16
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+ON                                00000007
+OSC2                              00000006
 OSCCON                            00000FD3
 OSCCON2                           00000FD2
 OSCFIE                            00000007
@@ -779,14 +930,14 @@ PMD1                              00000F7F
 POR                               00000001
 PORTA                             00000F80
 PORTB                             00000F81
-PORTC                             00000F82
-PORTD                             00000F83
-MPASM 5.77                      ELEVADOR.ASM   2-23-2019  18:48:57         PAGE 15
+MPASM 5.77                      ELEVADOR.ASM   2-25-2019  15:00:01         PAGE 17
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+PORTC                             00000F82
+PORTD                             00000F83
 PORTE                             00000F84
 POSTDEC0                          00000FED
 POSTDEC1                          00000FE5
@@ -838,14 +989,14 @@ RB6                               00000006
 RB7                               00000007
 RBPU                              00000007
 RC0                               00000000
-RC1                               00000001
-RC1IE                             00000005
-MPASM 5.77                      ELEVADOR.ASM   2-23-2019  18:48:57         PAGE 16
+MPASM 5.77                      ELEVADOR.ASM   2-25-2019  15:00:01         PAGE 18
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+RC1                               00000001
+RC1IE                             00000005
 RC1IF                             00000005
 RC1IP                             00000005
 RC2                               00000002
@@ -879,7 +1030,7 @@ RE1                               00000001
 RE2                               00000002
 RE3                               00000003
 RESUME                            00000002
-RETARDO                           000000DA
+RETARDO                           000001D6
 RI                                00000004
 RSEN                              00000001
 RX                                00000007
@@ -887,6 +1038,7 @@ RX9                               00000006
 RX9D                              00000000
 RXDTP                             00000005
 R_NOT_W                           00000002
+Retardo_1                         000001F0
 S                                 00000003
 SBCDE                             00000002
 SBOREN                            00000006
@@ -896,15 +1048,15 @@ SCS0                              00000000
 SCS1                              00000001
 SDAHT                             00000003
 SE0                               00000005
-SEN                               00000000
-SENDB                             00000003
-SIDL                              00000005
-MPASM 5.77                      ELEVADOR.ASM   2-23-2019  18:48:57         PAGE 17
+MPASM 5.77                      ELEVADOR.ASM   2-25-2019  15:00:01         PAGE 19
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+SEN                               00000000
+SENDB                             00000003
+SIDL                              00000005
 SLRA                              00000000
 SLRB                              00000001
 SLRC                              00000002
@@ -955,15 +1107,15 @@ SRSC1E                            00000004
 SRSC2E                            00000005
 SRSCKE                            00000006
 SRSPE                             00000007
-SSP1ADD                           00000FC8
-SSP1ADD0                          00000000
-SSP1ADD1                          00000001
-MPASM 5.77                      ELEVADOR.ASM   2-23-2019  18:48:57         PAGE 18
+MPASM 5.77                      ELEVADOR.ASM   2-25-2019  15:00:01         PAGE 20
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+SSP1ADD                           00000FC8
+SSP1ADD0                          00000000
+SSP1ADD1                          00000001
 SSP1ADD2                          00000002
 SSP1ADD3                          00000003
 SSP1ADD4                          00000004
@@ -1014,18 +1166,18 @@ STIE                              00000007
 STIF                              00000007
 STIP                              00000007
 STKFUL                            00000007
-STKOVF                            00000007
-STKPTR                            00000FFC
-STKUNF                            00000006
-MPASM 5.77                      ELEVADOR.ASM   2-23-2019  18:48:57         PAGE 19
+MPASM 5.77                      ELEVADOR.ASM   2-25-2019  15:00:01         PAGE 21
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+STKOVF                            00000007
+STKPTR                            00000FFC
+STKUNF                            00000006
 STLOCK                            00000003
 STMD                              00000004
-STOP                              00000042
+STOP                              00000046
 STOR                              00000001
 STR1A                             00000000
 STR1B                             00000001
@@ -1039,9 +1191,9 @@ STRD                              00000003
 STRSYNC                           00000004
 STSRC                             00000004
 STUD                              00000006
-SUBIR_PRIMER_SEGUNDO              0000004A
-SUBIR_PRIMER_TERCERO              00000062
-SUBIR_SEGUNDO_TERCER              0000007A
+SUBIR_PRIMER_SEGUNDO              00000052
+SUBIR_PRIMER_TERCERO              00000096
+SUBIR_SEGUNDO_TERCER              000000D6
 SUSPND                            00000001
 SWDTE                             00000000
 SWDTEN                            00000000
@@ -1073,15 +1225,15 @@ T1GSS0                            00000000
 T1GSS1                            00000001
 T1GTM                             00000005
 T1GVAL                            00000002
-T1OSCEN                           00000003
-T1OSI                             00000001
-T1OSO                             00000000
-MPASM 5.77                      ELEVADOR.ASM   2-23-2019  18:48:57         PAGE 20
+MPASM 5.77                      ELEVADOR.ASM   2-25-2019  15:00:01         PAGE 22
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+T1OSCEN                           00000003
+T1OSI                             00000001
+T1OSO                             00000000
 T1RD16                            00000001
 T1SOSCEN                          00000003
 T1SYNC                            00000002
@@ -1132,15 +1284,15 @@ TMR1GIF                           00000000
 TMR1GIP                           00000000
 TMR1H                             00000FCF
 TMR1IE                            00000000
-TMR1IF                            00000000
-TMR1IP                            00000000
-TMR1L                             00000FCE
-MPASM 5.77                      ELEVADOR.ASM   2-23-2019  18:48:57         PAGE 21
+MPASM 5.77                      ELEVADOR.ASM   2-25-2019  15:00:01         PAGE 23
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+TMR1IF                            00000000
+TMR1IP                            00000000
+TMR1L                             00000FCE
 TMR1MD                            00000000
 TMR1ON                            00000000
 TMR2                              00000FBC
@@ -1168,7 +1320,7 @@ TOS                               00000FFD
 TOSH                              00000FFE
 TOSL                              00000FFD
 TOSU                              00000FFF
-TRES                              000000DA
+TRES                              000001D6
 TRIGEN                            00000000
 TRIGSEL                           00000007
 TRISA                             00000F92
@@ -1191,15 +1343,15 @@ TRISB6                            00000006
 TRISB7                            00000007
 TRISC                             00000F94
 TRISC0                            00000000
-TRISC1                            00000001
-TRISC2                            00000002
-TRISC4                            00000004
-MPASM 5.77                      ELEVADOR.ASM   2-23-2019  18:48:57         PAGE 22
+MPASM 5.77                      ELEVADOR.ASM   2-25-2019  15:00:01         PAGE 24
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+TRISC1                            00000001
+TRISC2                            00000002
+TRISC4                            00000004
 TRISC5                            00000005
 TRISC6                            00000006
 TRISC7                            00000007
@@ -1250,15 +1402,15 @@ UARTMD                            00000006
 UCFG                              00000F62
 UCON                              00000F60
 UEIE                              00000F66
-UEIR                              00000F67
-UEP0                              00000F6A
-UEP1                              00000F6B
-MPASM 5.77                      ELEVADOR.ASM   2-23-2019  18:48:57         PAGE 23
+MPASM 5.77                      ELEVADOR.ASM   2-25-2019  15:00:01         PAGE 25
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+UEIR                              00000F67
+UEP0                              00000F6A
+UEP1                              00000F6B
 UEP10                             00000F74
 UEP11                             00000F75
 UEP12                             00000F76
@@ -1280,7 +1432,7 @@ UFRMH                             00000F69
 UFRML                             00000F68
 UIE                               00000F64
 UIR                               00000F65
-UNO                               000000E2
+UNO                               000001DE
 UOEMON                            00000006
 UPUEN                             00000004
 URSTIE                            00000000
@@ -1309,15 +1461,15 @@ WPUB1                             00000001
 WPUB2                             00000002
 WPUB3                             00000003
 WPUB4                             00000004
-WPUB5                             00000005
-WPUB6                             00000006
-WPUB7                             00000007
-MPASM 5.77                      ELEVADOR.ASM   2-23-2019  18:48:57         PAGE 24
+MPASM 5.77                      ELEVADOR.ASM   2-25-2019  15:00:01         PAGE 26
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+WPUB5                             00000005
+WPUB6                             00000006
+WPUB7                             00000007
 WPUE3                             00000007
 WR                                00000001
 WREG                              00000FE8
@@ -1368,15 +1520,15 @@ _CPUDIV_NOCLKDIV_1L               000000E7
 _DEBUG_OFF_4L                     000000FF
 _DEBUG_ON_4L                      0000007F
 _DEVID1                           003FFFFE
-_DEVID2                           003FFFFF
-_EBTR0_OFF_7L                     000000FF
-_EBTR0_ON_7L                      000000FE
-MPASM 5.77                      ELEVADOR.ASM   2-23-2019  18:48:57         PAGE 25
+MPASM 5.77                      ELEVADOR.ASM   2-25-2019  15:00:01         PAGE 27
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+_DEVID2                           003FFFFF
+_EBTR0_OFF_7L                     000000FF
+_EBTR0_ON_7L                      000000FE
 _EBTR1_OFF_7L                     000000FF
 _EBTR1_ON_7L                      000000FD
 _EBTR2_OFF_7L                     000000FF
@@ -1427,15 +1579,15 @@ _PLLSEL_PLL3X_1L                  000000FF
 _PLLSEL_PLL4X_1L                  000000FE
 _SDOMX_RB3_3H                     000000FF
 _SDOMX_RC7_3H                     000000BF
-_STVREN_OFF_4L                    000000FE
-_STVREN_ON_4L                     000000FF
-_T3CMX_RB5_3H                     000000EF
-MPASM 5.77                      ELEVADOR.ASM   2-23-2019  18:48:57         PAGE 26
+MPASM 5.77                      ELEVADOR.ASM   2-25-2019  15:00:01         PAGE 28
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+_STVREN_OFF_4L                    000000FE
+_STVREN_ON_4L                     000000FF
+_T3CMX_RB5_3H                     000000EF
 _T3CMX_RC0_3H                     000000FF
 _WDTEN_NOSLP_2H                   000000FD
 _WDTEN_OFF_2H                     000000FC
@@ -1480,7 +1632,7 @@ _nPWRTEN_OFF_2L                   000000FF
 _nPWRTEN_ON_2L                    000000FE
 
 Errors   :     0
-Warnings :    15 reported,     0 suppressed
+Warnings :    18 reported,     0 suppressed
 Messages :     0 reported,     0 suppressed
 
 

@@ -10,19 +10,23 @@ LIST P = 18f45K50
     Aux1 EQU 0x00		;reserva un byte en registro 0
     Aux2 EQU 0x01
     Aux3 EQU 0x02
-  
+    Aux4 EQU 0x03
+    Aux5 EQU 0x04
  Start:
     MOVLB 0x0F
     CLRF Aux1
     Clrf Aux2
     Clrf Aux3
+    CLRF Aux4
+    CLRF Aux5
     
     CLRF ANSELA 
     CLRF ANSELD
-    CLRF ANSELC
+    CLRF ANSELB
+    
     CLRF TRISD
     CLRF TRISA
-    CLRF TRISC
+    CLRF TRISB
     
     MOVLW b'01010011'		;Configura Registro OSCCON
     MOVWF OSCCON
@@ -47,18 +51,43 @@ LIST P = 18f45K50
     STOP:
     MOVLW 0x00
     MOVWF LATD
+    MOVLW 0x00
+    MOVWF LATB
     GOTO Mainloop
     
 SUBIR_PRIMER_SEGUNDO:
+    
+   
+    
     MOVLW 0x82
     MOVWF LATD
     CALL RETARDO
+    
+    MOVLW 0x01
+    MOVWF LATB
+    CALL Retardo_1
+    MOVLW 0x00
+    MOVWF LATB
+    CALL Retardo_1
+   
     MOVLW 0x08
     MOVWF LATD
     CALL RETARDO
+    
+    MOVLW 0x01
+    MOVWF LATB
+    CALL Retardo_1
+    MOVLW 0x00
+    MOVWF LATB
+    CALL Retardo_1
+    
     MOVLW 0x00
     MOVWF LATD
+    CALL RETARDO
     
+    MOVLW 0x01
+    MOVWF LATB
+    CALL Retardo_1
     
     GOTO Mainloop
     
@@ -66,12 +95,32 @@ SUBIR_PRIMER_TERCERO:
     MOVLW 0x82
     MOVWF LATD
     CALL RETARDO
+    
+    MOVLW 0x01
+    MOVWF LATB
+    CALL Retardo_1
+    MOVLW 0x00
+    MOVWF LATB
+    CALL Retardo_1
+    
+    
     MOVLW 0x20
     MOVWF LATD
     CALL RETARDO
+    
+    MOVLW 0x01
+    MOVWF LATB
+    CALL Retardo_1
+    MOVLW 0x00
+    MOVWF LATB
+    CALL Retardo_1
+    
     MOVLW 0x00
     MOVWF LATD
     
+    MOVLW 0x01
+    MOVWF LATB
+    CALL Retardo_1
     
     GOTO Mainloop    
     
@@ -79,47 +128,127 @@ SUBIR_PRIMER_TERCERO:
     MOVLW 0x88
     MOVWF LATD
     CALL RETARDO
+    
+    MOVLW 0x01
+    MOVWF LATB
+    CALL Retardo_1
+    MOVLW 0x00
+    MOVWF LATB
+    CALL Retardo_1
+    
     MOVLW 0x20
     MOVWF LATD
     CALL RETARDO
+    
+    MOVLW 0x01
+    MOVWF LATB
+    CALL Retardo_1
+    MOVLW 0x00
+    MOVWF LATB
+    CALL Retardo_1
+    
     MOVLW 0x00
     MOVWF LATD
+  
+    MOVLW 0x01
+    MOVWF LATB
+    CALL Retardo_1
     GOTO Mainloop 
     
     BAJAR_TERCER_SEGUNDO:
     MOVLW 0x60
     MOVWF LATD
     CALL RETARDO
+    
+    MOVLW 0x01
+    MOVWF LATB
+    CALL Retardo_1
+    MOVLW 0x00
+    MOVWF LATB
+    CALL Retardo_1
+    
     MOVLW 0x08
     MOVWF LATD
     CALL RETARDO
+    
+    MOVLW 0x01
+    MOVWF LATB
+    CALL Retardo_1
+    MOVLW 0x00
+    MOVWF LATB
+    CALL Retardo_1
+    
     MOVLW 0x00
     MOVWF LATD
+    
+    MOVLW 0x01
+    MOVWF LATB
+    CALL Retardo_1
     GOTO Mainloop
     
     BAJAR_TERCER_PRIMER:
     MOVLW 0x60
     MOVWF LATD
     CALL RETARDO
+    
+    MOVLW 0x01
+    MOVWF LATB
+    CALL Retardo_1
+    MOVLW 0x00
+    MOVWF LATB
+    CALL Retardo_1
+    
     MOVLW 0x02
     MOVWF LATD
     CALL RETARDO
+    
+    MOVLW 0x01
+    MOVWF LATB
+    CALL Retardo_1
+    MOVLW 0x00
+    MOVWF LATB
+    CALL Retardo_1
+    
     MOVLW 0x00
     MOVWF LATD
+    
+    MOVLW 0x01
+    MOVWF LATB
+    CALL Retardo_1
     GOTO Mainloop
     
     BAJAR_SEGUNDO_PRIMER:
     MOVLW 0x48
     MOVWF LATD
     CALL RETARDO
+    
+    MOVLW 0x01
+    MOVWF LATB
+    CALL Retardo_1
+    MOVLW 0x00
+    MOVWF LATB
+    CALL Retardo_1
+    
     MOVLW 0x02
     MOVWF LATD
     CALL RETARDO
+    
+    MOVLW 0x01
+    MOVWF LATB
+    CALL Retardo_1
+    MOVLW 0x00
+    MOVWF LATB
+    CALL Retardo_1
+    
     MOVLW 0x00
     MOVWF LATD
+    
+    MOVLW 0x01
+    MOVWF LATB
+    CALL Retardo_1
     GOTO Mainloop
     
-    
+   
 
     
     RETARDO:
@@ -139,6 +268,11 @@ SUBIR_PRIMER_TERCERO:
  
     RETURN 
    
-    
+   Retardo_1:
+    DECFSZ Aux4, 1		
+    GOTO Retardo_1		
+    DECFSZ Aux5, 1		
+    GOTO Retardo_1		
+    RETURN 
     
     END
